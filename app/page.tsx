@@ -1,9 +1,5 @@
-import WelcomePage from "@/screens/WelcomePage";
+import HomePage from "@/components/gallery/HomePage";
 
 export default function page() {
-    return (
-        <main>
-            <WelcomePage />
-        </main>
-    );
+    return <HomePage />;
 }

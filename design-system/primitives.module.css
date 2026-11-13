@@ -1,0 +1,20 @@
+.page { min-height: 100vh; color: var(--ds-fg); background: var(--ds-bg); transition: background var(--ds-duration), color var(--ds-duration); }
+.container { width: min(100% - 2 * var(--ds-page-gutter), var(--ds-content-max)); margin-inline: auto; }
+.stack { display: flex; flex-direction: column; gap: var(--ds-space-5); }
+.cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-4); }
+.split { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-5); }
+.eyebrow { margin: 0; font-size: var(--ds-text-xs); font-weight: 700; letter-spacing: .18em; line-height: 1.4; text-transform: uppercase; }
+.display { margin: 0; font-family: var(--ds-font-display); font-size: var(--ds-text-title); font-weight: 400; letter-spacing: -.075em; line-height: .9; }
+.display em { font-weight: 400; }
+.heading { margin: 0; font-family: var(--ds-font-display); font-size: clamp(2.4rem, 5vw, 5rem); font-weight: 400; letter-spacing: -.055em; line-height: 1; }
+.body { margin: 0; font-size: var(--ds-text-md); line-height: 1.65; }
+.muted { color: var(--ds-muted); }
+.rule { height: var(--ds-border-width); border: 0; background: var(--ds-line); }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: var(--ds-space-4); min-height: 3rem; padding: .75rem 1.2rem; border: var(--ds-border-width) solid var(--ds-fg); border-radius: var(--ds-radius); color: var(--ds-fg); background: transparent; font-size: var(--ds-text-xs); font-weight: 700; letter-spacing: .13em; text-decoration: none; text-transform: uppercase; transition: color var(--ds-duration) var(--ds-ease), background var(--ds-duration) var(--ds-ease); }
+.button:hover { color: var(--ds-inverse); background: var(--ds-fg); }
+.buttonSolid { color: var(--ds-inverse); background: var(--ds-fg); }
+.buttonSolid:hover { color: var(--ds-fg); background: transparent; }
+.iconButton { display: inline-grid; place-items: center; min-width: 2.75rem; min-height: 2.75rem; padding: .4rem; border: var(--ds-border-width) solid var(--ds-line); color: var(--ds-fg); background: transparent; transition: background var(--ds-duration); }
+.iconButton:hover { background: var(--ds-surface); }
+.textLink { display: inline-flex; justify-content: space-between; align-items: center; gap: var(--ds-space-6); padding-bottom: .7rem; border-bottom: 1px solid currentColor; color: inherit; font-size: var(--ds-text-xs); font-weight: 700; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; }
+.surface { color: var(--ds-fg); background: var(--ds-surface); }

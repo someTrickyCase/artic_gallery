@@ -1,38 +1,23 @@
 # Repository Guidelines
 
-## Project Structure & Module Organization
+## Project Structure
 
-This gallery uses Next.js, React 19, TypeScript, Tailwind CSS, CSS Modules, SWR, and Zustand to display Art Institute of Chicago artwork.
+This Next.js 16 gallery uses React, TypeScript, SWR, Zustand, and CSS Modules. Routes and the museum API proxies live in `app/`. The live UI is in `components/gallery/`: `GalleryShell` provides theme and navigation, `GalleryPage` handles collection, search, and favorites, `ArtworkGrid` arranges the Bento layout, and `ArtworkDetail` handles individual works. `hooks/` and `api/` fetch paginated data; `store/useStore.ts` persists preferences and favorites for the browser session.
 
-- `app/` defines routes, the root layout, and global styles. Gallery routes live under `app/arts/`, including `[artid]`, `search`, and `favorites`.
-- `screens/` contains screen components composed by the app routes.
-- `components/` holds artwork cards, feeds, navigation, shared controls, and UI primitives.
-- `api/` contains API fetchers; `hooks/` contains data and preference hooks; `store/useStore.ts` manages state persisted in session storage.
-- `types/`, `settings/dictionary.ts`, and `lib/` contain shared types, translations, and utilities.
-- `app/tokens.css` defines design tokens; `*.module.css` files scope screen and component styles.
-- Artwork images are fetched remotely; there is no dedicated local asset or test directory.
+## Portable Design System
 
-## Build, Test, and Development Commands
+`design-system/` is deliberately independent of gallery content. Import `design-system/global.css` once at the root. Set `data-theme="light"` or `data-theme="dark"` on the application shell. Use the `--ds-` semantic variables from `tokens.css` for colors, type, spacing, and motion. Compose layout and control classes from `primitives.module.css`; keep gallery-specific composition in colocated CSS Modules. Read `design-system/README.md` before changing shared primitives. Avoid hardcoded colors and new global utility classes in feature code.
 
-- `npm ci`: install dependencies from `package-lock.json`.
-- `npm run dev`: start the development server with Turbopack.
-- `npm run build`: create a production build.
-- `npm start`: serve the production build after building.
-- `npm run lint`: run ESLint using `eslint.config.mjs`.
-- `npm run typecheck`: check TypeScript types without emitting JavaScript.
+## Commands and Checks
 
-## Coding Style & Naming Conventions
+- `npm ci` installs the lockfile with Node.js 24.
+- `npm run dev` starts the local app.
+- `npm run lint` runs Next.js and TypeScript ESLint rules.
+- `npm run typecheck` checks types without output.
+- `npm run build` creates and validates a production build; `npm start` serves it.
 
-Use strict TypeScript and explicit types for API data and component props. Follow surrounding formatting: application code generally uses four-space indentation, semicolons, double-quoted TypeScript strings, and single-quoted JSX attributes. Configuration files may use two spaces. No formatter is configured. Put reusable values in `app/tokens.css` and new component styles in colocated CSS Modules.
+No automated test suite or coverage threshold exists. Before a PR, run lint, type checking, and a build. Manually verify the collection grid, search, artwork details, favorites, language and theme toggles, and narrow screens. Check that `/api/artic/` and `/api/image/` return data when diagnosing empty artwork or image views.
 
-Use PascalCase for component files, `use`-prefixed camelCase for hooks, and Next.js route filenames such as `page.tsx`. Prefer `@/` imports for shared modules. Keep translated text in `settings/dictionary.ts`. ESLint applies Next.js Core Web Vitals and TypeScript rules.
+## Code and PR Conventions
 
-## Testing Guidelines
-
-No test runner, test naming convention, or coverage threshold is configured. Run lint, type checks, and a production build before submitting changes. Manually verify browsing, pagination, search, artwork details, favorites, language switching, and themes. Check session persistence and narrow-screen layouts when relevant. Describe validation performed in the pull request.
-
-## Commit & Pull Request Guidelines
-
-Existing history uses short, plain-language subjects such as `Update README.md`; no formal commit convention is established. Write concise, action-oriented subjects and keep commits focused.
-
-Pull requests should explain the change, link relevant issues, and list validation results and known limitations. Include screenshots for visible UI changes. Avoid unrelated formatting or lockfile changes.
+Use strict types for API data and component props. Name React components in PascalCase and hooks with `use` plus camelCase. Prefer `@/` imports for shared code. Follow the formatting of the file you edit; no formatter is configured. Git history uses short action-oriented subjects rather than a formal convention. PRs should describe visible changes, link relevant issues, include validation results, and show screenshots for UI work.

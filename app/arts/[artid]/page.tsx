@@ -1,9 +1,6 @@
-import ArtPage from "@/screens/ArtPage";
+import ArtworkDetail from "@/components/gallery/ArtworkDetail";
 
-export default function page() {
-    return (
-        <main>
-            <ArtPage />
-        </main>
-    );
+export default async function page({ params }: { params: Promise<{ artid: string }> }) {
+    const { artid } = await params;
+    return <ArtworkDetail id={artid} />;
 }

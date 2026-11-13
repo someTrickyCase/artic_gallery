@@ -1,0 +1,50 @@
+/* Copy this file and primitives.module.css to reuse the visual language. */
+:root {
+  --ds-font-display: Georgia, 'Times New Roman', serif;
+  --ds-font-body: Arial, Helvetica, sans-serif;
+  --ds-text-xs: .7rem;
+  --ds-text-sm: .84rem;
+  --ds-text-md: 1rem;
+  --ds-text-lg: clamp(1.25rem, 2vw, 1.6rem);
+  --ds-text-title: clamp(3.8rem, 9vw, 9rem);
+  --ds-space-1: .25rem;
+  --ds-space-2: .5rem;
+  --ds-space-3: .75rem;
+  --ds-space-4: 1rem;
+  --ds-space-5: 1.5rem;
+  --ds-space-6: 2rem;
+  --ds-space-7: 3rem;
+  --ds-space-8: 4rem;
+  --ds-page-gutter: clamp(1.25rem, 4vw, 4.5rem);
+  --ds-content-max: 100rem;
+  --ds-border-width: 1px;
+  --ds-radius: 0;
+  --ds-duration: 240ms;
+  --ds-ease: cubic-bezier(.2, .7, .2, 1);
+  --ds-on-media: #f2f0ec;
+  --ds-media-backdrop: #202020;
+  --ds-media-scrim: linear-gradient(90deg, rgba(0,0,0,.83), rgba(0,0,0,.1) 78%), linear-gradient(0deg, rgba(0,0,0,.5), transparent 50%);
+  --ds-tile-scrim: linear-gradient(180deg, rgba(0,0,0,.3), transparent 35%, rgba(0,0,0,.8));
+}
+
+[data-theme='light'] {
+  --ds-bg: #eae8e3;
+  --ds-surface: #dcd9d2;
+  --ds-surface-raised: #f3f1ed;
+  --ds-fg: #191919;
+  --ds-muted: #65635f;
+  --ds-line: #aaa7a0;
+  --ds-inverse: #f2f0ec;
+  --ds-scrim: rgba(0, 0, 0, .70);
+}
+
+[data-theme='dark'] {
+  --ds-bg: #171717;
+  --ds-surface: #282828;
+  --ds-surface-raised: #242424;
+  --ds-fg: #eeece8;
+  --ds-muted: #aaa7a1;
+  --ds-line: #55534e;
+  --ds-inverse: #171717;
+  --ds-scrim: rgba(0, 0, 0, .78);
+}

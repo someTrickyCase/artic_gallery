@@ -1,19 +1,19 @@
 # ARTIC Gallery
 
-An art gallery built with Next.js and the Art Institute of Chicago public API. Browse artworks, search the collection, inspect details, and save favorites for the current browser session. The interface supports English and Russian and has light and dark themes.
+A monochrome gallery for exploring the Art Institute of Chicago collection. Browse a staggered Bento grid, search artworks, open details, and save favorites for the current browser session. The interface supports English and Russian, plus light and dark themes.
 
-## Getting started
+## Run locally
 
-Use Node.js 24 (also pinned in `.node-version`). Install dependencies and start the development server:
+Use Node.js 24 (pinned in `.node-version`):
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open `http://localhost:3000`. Artwork data and images require an internet connection to the Art Institute of Chicago API and image service. No API key or environment file is required.
+Open `http://localhost:3000`. No API key or environment file is required. The app needs internet access to the museum's API and IIIF image service.
 
-## Checks and production build
+## Validate and build
 
 ```sh
 npm run lint
@@ -22,16 +22,11 @@ npm run build
 npm start
 ```
 
-## Project layout
+## Structure
 
-`app/` contains routes, global CSS, and design tokens. `screens/` holds route screens; `components/` holds feeds, cards, and controls. Styles scoped to components live beside them as `*.module.css`. `api/` and `hooks/` fetch artworks, while `store/` stores favorites and preferences in session storage. Shared translations and types live in `settings/` and `types/`.
+- `app/` contains routes and the local artwork/image API proxies.
+- `components/gallery/` contains the gallery shell, Bento grid, tiles, feed pages, landing page, detail page, and translations.
+- `design-system/` is the portable style layer. Its `tokens.css` defines semantic palettes, type, spacing, and motion; `primitives.module.css` defines small composable layout and control classes. See [design-system/README.md](design-system/README.md) for reuse instructions.
+- `hooks/` and `api/` handle paginated artwork requests; `store/` persists favorites and preferences in session storage.
 
-Design tokens in `app/tokens.css` define colors, spacing, typography, motion, and sizing. Theme colors are selected with `data-theme` on each screen.
-
-## Design previews
-
-Open `/preview` to compare three monochrome directions: `/preview/editorial`, `/preview/archive`, and `/preview/nocturne`. Each route has a light/dark switch. These are design studies with a small curated artwork set; the main gallery remains at `/arts`.
-
-Artwork data is provided by the [Art Institute of Chicago API](https://api.artic.edu/docs/).
-
-The browser requests artwork data and images through local `/api/artic/` and `/api/image/` routes. These routes identify the app to the museum using its `AIC-User-Agent` header, then return data and supported IIIF image sizes. This avoids browser CORS restrictions and server-side 403 responses seen without the header. No image API key or environment variable is needed. If an artwork has no image, the gallery displays a fallback.
+The browser calls `/api/artic/` and `/api/image/`. These server routes send the museum's documented `AIC-User-Agent` header and avoid browser CORS restrictions. The image route permits supported IIIF sizes only. Artwork data comes from the [Art Institute of Chicago API](https://api.artic.edu/docs/).
