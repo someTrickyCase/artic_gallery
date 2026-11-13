@@ -4,7 +4,7 @@ An art gallery built with Next.js and the Art Institute of Chicago public API. B
 
 ## Getting started
 
-Use a supported Node.js version for the installed Next.js release. Install dependencies and start the development server:
+Use Node.js 24 (also pinned in `.node-version`). Install dependencies and start the development server:
 
 ```sh
 npm ci
