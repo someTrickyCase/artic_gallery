@@ -28,6 +28,10 @@ npm start
 
 Design tokens in `app/tokens.css` define colors, spacing, typography, motion, and sizing. Theme colors are selected with `data-theme` on each screen.
 
+## Design previews
+
+Open `/preview` to compare three monochrome directions: `/preview/editorial`, `/preview/archive`, and `/preview/nocturne`. Each route has a light/dark switch. These are design studies with a small curated artwork set; the main gallery remains at `/arts`.
+
 Artwork data is provided by the [Art Institute of Chicago API](https://api.artic.edu/docs/).
 
 The browser requests artwork data and images through local `/api/artic/` and `/api/image/` routes. These routes identify the app to the museum using its `AIC-User-Agent` header, then return data and supported IIIF image sizes. This avoids browser CORS restrictions and server-side 403 responses seen without the header. No image API key or environment variable is needed. If an artwork has no image, the gallery displays a fallback.
