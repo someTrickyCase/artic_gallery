@@ -1,10 +1,11 @@
 import { ArtType, LanguageSwitcherType } from "@/types/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useStore } from "@/store/useStore";
 
 import Image from "next/image";
 import Link from "next/link";
 import { DICTIONARY } from "@/settings/dictionary";
+import styles from "./Card.module.css";
 
 const phrases = DICTIONARY["addToFavoriteButtonPhrases"];
 
@@ -18,48 +19,40 @@ export default function Card({
     index: number;
 }) {
     const { image_id, artist_display, title, id } = artItem;
-    const imageLink = `https://www.artic.edu/iiif/2/${image_id}/full/400,/0/default.jpg`;
+    const imageLink = image_id ? `/api/image/${image_id}?size=400` : null;
 
     const [isError, setIsError] = useState(false);
-    const [isFavorite, setIsFavorite] = useState(false);
     const { favorites, setSelectedArt } = useStore();
+    const isFavorite = favorites.some((favoriteItem) => favoriteItem.id === id);
 
-    useEffect(() => {
-        favorites.map((favoriteItem) => {
-            if (favoriteItem.id === artItem.id) setIsFavorite(true);
-        });
-    }, [favorites, artItem]);
-
-    if (isError) return;
     return (
         <div
-            className={`border border-foreground rounded-sm p-2 one-column h-fit ${
-                index % 4 === 0 || index % 7 === 0 ? "md:col-span-2" : "md:col-span-1"
-            }`}>
+            className={`${styles.card} ${index % 4 === 0 || index % 7 === 0 ? styles.wide : ""}`}>
             <Link
                 onClick={() => setSelectedArt(artItem)}
                 href={{
-                    pathname: `/arts/id=${id}`,
+                    pathname: `/arts/${id}`,
                 }}>
-                <Image
+                {imageLink && !isError ? <Image
+                    unoptimized
                     priority
                     src={imageLink}
                     alt={title}
-                    className='w-fill'
+                    className={styles.image}
                     width={640}
                     height={480}
                     onError={() => {
                         setIsError(true);
                     }}
-                />
+                /> : <div className={styles.imageFallback} role='img' aria-label={`Image unavailable for ${title}`}>Image unavailable</div>}
             </Link>
-            <div className='one-column !gap-1 !items-start !text-start w-full px-2'>
-                <p className='text-sm font-extralight'>
+            <div className={styles.details}>
+                <p className={styles.artist}>
                     {artist_display ? artist_display : "unknown"}
                 </p>
-                <h2 className='bg-foreground text-background text-lg font-semibold'>{title}</h2>
+                <h2 className={styles.label}>{title}</h2>
                 {isFavorite && (
-                    <div className='self-start text-lg font-semibold bg-foreground text-background'>
+                    <div className={styles.label}>
                         {phrases["added"][language]}
                     </div>
                 )}

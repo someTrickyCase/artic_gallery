@@ -28,15 +28,10 @@ export default function Header({
     const navigator = useRouter();
 
     useEffect(() => {
-        window.addEventListener("wheel", (e) => hideHeaderOnScroll(e));
-        return window.addEventListener("wheel", (e) => hideHeaderOnScroll(e));
-    });
-
-    function hideHeaderOnScroll(e: WheelEvent) {
-        const delta = e.deltaY;
-        if (delta === 120) setIsActive(false);
-        else setIsActive(true);
-    }
+        const onWheel = (event: WheelEvent) => setIsActive(event.deltaY <= 0);
+        window.addEventListener("wheel", onWheel, { passive: true });
+        return () => window.removeEventListener("wheel", onWheel);
+    }, []);
 
     return (
         <div

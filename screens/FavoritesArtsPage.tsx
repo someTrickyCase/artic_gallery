@@ -2,24 +2,26 @@
 
 import useLanguage from "@/hooks/useLanguage";
 import useTheme from "@/hooks/useTheme";
+import { useStore } from "@/store/useStore";
 
-import SearchFeed from "@/components/Feed/SearchFeed";
+import FavoritesFeed from "@/components/Feed/FavoritesFeed";
 import Header from "@/components/Header/Header";
+import styles from "@/app/Gallery.module.css";
 
-export default function ArtListPage({ query }: { query: string }) {
+export default function FavoritesArtsPage() {
     const { theme, setTheme } = useTheme();
     const { language, setLanguage } = useLanguage();
-
+    const { favorites } = useStore();
     return (
-        <section className={`fullscreen one-column px-5 ${theme === "dark" ? "dark" : "brigth"}`}>
+        <section data-theme={theme === "dark" ? "dark" : "bright"} className={`${styles.screen} ${theme === "dark" ? "dark" : "brigth"}`}>
             <Header
-                noSearch
+                navigateBack
                 language={language}
                 theme={theme}
                 languageSwitcher={setLanguage}
                 themeSwitcher={setTheme}
             />
-            <SearchFeed language={language} query={query} />
+            <FavoritesFeed language={language} data={favorites} />
         </section>
     );
 }

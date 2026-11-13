@@ -11,7 +11,7 @@ import Card from "./Card/Card";
 const phrases = DICTIONARY.feedMessages;
 
 export default function Feed({ language }: { language: LanguageSwitcherType }) {
-    const { data, isLoading, size, setSize } = useArts();
+    const { data, error, isLoading, size, setSize } = useArts();
 
     return (
         <div className='pt-20 mb-5 !gap-4 w-full one-column'>
@@ -22,6 +22,7 @@ export default function Feed({ language }: { language: LanguageSwitcherType }) {
                 {phrases.title[language]}
             </h1>
             {isLoading && <Sonner language={language} />}
+            {error && <p role='alert'>Artworks could not be loaded. Please try again later.</p>}
             <BentoGrid className='max-w-4xl mx-auto mb-4'>
                 {data &&
                     data.map((dataItem) =>
@@ -40,7 +41,6 @@ export default function Feed({ language }: { language: LanguageSwitcherType }) {
                     language={language}
                     sizeToLoad={size}
                     loader={setSize}
-                    data={data}
                 />
             )}
         </div>

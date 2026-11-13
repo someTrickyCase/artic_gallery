@@ -15,7 +15,7 @@ export type welcomePhrasesType = {
 
 export type ArtType = {
     id: number;
-    image_id: string;
+    image_id: string | null;
     artist_display: string;
     title: string;
     credit_line: string;

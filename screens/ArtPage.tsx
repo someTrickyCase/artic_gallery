@@ -4,24 +4,23 @@ import useLanguage from "@/hooks/useLanguage";
 import useTheme from "@/hooks/useTheme";
 
 import Header from "@/components/Header/Header";
-import Feed from "@/components/Feed/Feed";
+import ArtCard from "@/components/ArtCard/ArtCard";
+import styles from "@/app/Gallery.module.css";
 
-export default function ArtListPage() {
-    const { theme, setTheme } = useTheme();
+export default function ArtPage() {
     const { language, setLanguage } = useLanguage();
+    const { theme, setTheme } = useTheme();
 
     return (
-        <section
-            className={`fullscreen one-column px-5 overflow-y-scroll no-scrollbar ${
-                theme === "dark" ? "dark" : "brigth"
-            }`}>
+        <section data-theme={theme === "dark" ? "dark" : "bright"} className={`${styles.screen} ${theme === "dark" ? "dark" : "brigth"}`}>
             <Header
                 language={language}
                 theme={theme}
                 languageSwitcher={setLanguage}
                 themeSwitcher={setTheme}
+                navigateBack
             />
-            <Feed language={language} />
+            <ArtCard language={language} />
         </section>
     );
 }

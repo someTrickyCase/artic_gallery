@@ -17,7 +17,7 @@ export default function Feed({
     language: LanguageSwitcherType;
     query: string;
 }) {
-    const { data, isLoading, size, setSize } = useSearchedArts(query);
+    const { data, error, isLoading, size, setSize } = useSearchedArts(query);
 
     return (
         <div className='pt-20 pb-5 h-screen one-column !gap-4 w-full overflow-y-scroll no-scrollbar'>
@@ -28,6 +28,7 @@ export default function Feed({
                 {phrases.title[language] + " " + `"${query}"`}
             </h1>
             {isLoading && <Sonner language={language} />}
+            {error && <p role='alert'>Search results could not be loaded. Please try again later.</p>}
             <BentoGrid className='max-w-4xl mx-auto mb-4'>
                 {data &&
                     data.map((dataItem) =>
@@ -46,7 +47,6 @@ export default function Feed({
                     language={language}
                     sizeToLoad={size}
                     loader={setSize}
-                    data={data}
                 />
             )}
         </div>

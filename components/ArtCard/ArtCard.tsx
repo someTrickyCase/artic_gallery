@@ -7,13 +7,27 @@ import { LanguageSwitcherType } from "@/types/types";
 
 import Image from "next/image";
 import { DICTIONARY } from "@/settings/dictionary";
+import { useParams } from "next/navigation";
+import useSWR from "swr";
+import { ArtType } from "@/types/types";
+import { useState } from "react";
 import AddToFavoriteButton from "../shared/AddToFavoriteButton";
 
 const phrases = DICTIONARY.pageDescriptionMessages;
 
 export default function ArtCard({ language }: { language: LanguageSwitcherType }) {
+    const [failedImageId, setFailedImageId] = useState<string | null>(null);
     const { selectedArt } = useStore();
-    if (!selectedArt) return;
+    const params = useParams<{ artid: string }>();
+    const id = Number(params?.artid);
+    const { data: fetchedArt, error } = useSWR<ArtType>(Number.isInteger(id) && id > 0 ? String(id) : null, async (artId: string) => {
+        const response = await fetch(`/api/artic/artworks/${artId}`);
+        if (!response.ok) throw new Error("Failed to load artwork");
+        return (await response.json()).data as ArtType;
+    });
+    const art = selectedArt?.id === id ? selectedArt : fetchedArt;
+    if (error || !Number.isInteger(id) || id <= 0) return <p>Artwork could not be loaded.</p>;
+    if (!art) return <p>Loading artwork…</p>;
 
     const {
         title,
@@ -25,9 +39,9 @@ export default function ArtCard({ language }: { language: LanguageSwitcherType }
         artwork_type_title,
         exhibition_history,
         place_of_origin,
-    } = selectedArt;
+    } = art;
 
-    const imageLink = `https://www.artic.edu/iiif/2/${image_id}/full/900,/0/default.jpg`;
+    const imageLink = image_id ? `/api/image/${image_id}?size=843` : null;
 
     return (
         <div className='pt-20 pb-10 one-column w-full !gap-5 overflow-y-scroll no-scrollbar'>
@@ -37,9 +51,9 @@ export default function ArtCard({ language }: { language: LanguageSwitcherType }
                 {title}
             </h1>
             <div className='one-column !gap-1'>
-                <Image priority src={imageLink} alt={title} width={1600} height={900} />
+                {imageLink && failedImageId !== image_id ? <Image unoptimized priority src={imageLink} alt={title} width={843} height={600} onError={() => setFailedImageId(image_id)} /> : <p>Image unavailable</p>}
                 <AddToFavoriteButton
-                    artItem={selectedArt}
+                    artItem={art}
                     language={language}
                     className='self-end my-3'
                 />
