@@ -21,7 +21,7 @@ export default function ArtCard({ language }: { language: LanguageSwitcherType }
     const params = useParams<{ artid: string }>();
     const id = Number(params?.artid);
     const { data: fetchedArt, error } = useSWR<ArtType>(Number.isInteger(id) && id > 0 ? String(id) : null, async (artId: string) => {
-        const response = await fetch(`https://api.artic.edu/api/v1/artworks/${artId}`);
+        const response = await fetch(`/api/artic/artworks/${artId}`);
         if (!response.ok) throw new Error("Failed to load artwork");
         return (await response.json()).data as ArtType;
     });
@@ -41,7 +41,7 @@ export default function ArtCard({ language }: { language: LanguageSwitcherType }
         place_of_origin,
     } = art;
 
-    const imageLink = image_id ? `https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg` : null;
+    const imageLink = image_id ? `/api/image/${image_id}?size=843` : null;
 
     return (
         <div className='pt-20 pb-10 one-column w-full !gap-5 overflow-y-scroll no-scrollbar'>

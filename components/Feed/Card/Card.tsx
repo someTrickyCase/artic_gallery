@@ -19,7 +19,7 @@ export default function Card({
     index: number;
 }) {
     const { image_id, artist_display, title, id } = artItem;
-    const imageLink = image_id ? `https://www.artic.edu/iiif/2/${image_id}/full/400,/0/default.jpg` : null;
+    const imageLink = image_id ? `/api/image/${image_id}?size=400` : null;
 
     const [isError, setIsError] = useState(false);
     const { favorites, setSelectedArt } = useStore();

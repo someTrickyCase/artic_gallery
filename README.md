@@ -30,4 +30,4 @@ Design tokens in `app/tokens.css` define colors, spacing, typography, motion, an
 
 Artwork data is provided by the [Art Institute of Chicago API](https://api.artic.edu/docs/).
 
-Images load directly from the museum's IIIF service using its supported sizes. If the museum blocks a connection or an artwork has no image, the gallery displays an image fallback. No image API key or environment variable is needed.
+The browser requests artwork data and images through local `/api/artic/` and `/api/image/` routes. These routes identify the app to the museum using its `AIC-User-Agent` header, then return data and supported IIIF image sizes. This avoids browser CORS restrictions and server-side 403 responses seen without the header. No image API key or environment variable is needed. If an artwork has no image, the gallery displays a fallback.
