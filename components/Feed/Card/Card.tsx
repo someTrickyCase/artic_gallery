@@ -19,13 +19,12 @@ export default function Card({
     index: number;
 }) {
     const { image_id, artist_display, title, id } = artItem;
-    const imageLink = `https://www.artic.edu/iiif/2/${image_id}/full/400,/0/default.jpg`;
+    const imageLink = image_id ? `https://www.artic.edu/iiif/2/${image_id}/full/400,/0/default.jpg` : null;
 
     const [isError, setIsError] = useState(false);
     const { favorites, setSelectedArt } = useStore();
     const isFavorite = favorites.some((favoriteItem) => favoriteItem.id === id);
 
-    if (isError) return;
     return (
         <div
             className={`${styles.card} ${index % 4 === 0 || index % 7 === 0 ? styles.wide : ""}`}>
@@ -34,7 +33,8 @@ export default function Card({
                 href={{
                     pathname: `/arts/${id}`,
                 }}>
-                <Image
+                {imageLink && !isError ? <Image
+                    unoptimized
                     priority
                     src={imageLink}
                     alt={title}
@@ -44,7 +44,7 @@ export default function Card({
                     onError={() => {
                         setIsError(true);
                     }}
-                />
+                /> : <div className={styles.imageFallback} role='img' aria-label={`Image unavailable for ${title}`}>Image unavailable</div>}
             </Link>
             <div className={styles.details}>
                 <p className={styles.artist}>

@@ -29,3 +29,5 @@ npm start
 Design tokens in `app/tokens.css` define colors, spacing, typography, motion, and sizing. Theme colors are selected with `data-theme` on each screen.
 
 Artwork data is provided by the [Art Institute of Chicago API](https://api.artic.edu/docs/).
+
+Images load directly from the museum's IIIF service using its supported sizes. If the museum blocks a connection or an artwork has no image, the gallery displays an image fallback. No image API key or environment variable is needed.
