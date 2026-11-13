@@ -1,9 +1,5 @@
-import ArtsListPage from "@/screens/ArtsListPage";
+import { CollectionPage } from "@/components/gallery/GalleryPage";
 
 export default function page() {
-    return (
-        <main>
-            <ArtsListPage />
-        </main>
-    );
+    return <CollectionPage />;
 }

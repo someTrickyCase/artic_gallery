@@ -1,9 +1,5 @@
-import FavoritesArtsPage from "@/screens/FavoritesArtsPage";
+import { FavoritesPage } from "@/components/gallery/GalleryPage";
 
 export default function page() {
-    return (
-        <main>
-            <FavoritesArtsPage />
-        </main>
-    );
+    return <FavoritesPage />;
 }

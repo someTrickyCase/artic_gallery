@@ -1,0 +1,30 @@
+.main { padding-top: var(--ds-space-7); padding-bottom: var(--ds-space-8); }
+.heading { margin: clamp(4rem, 8vw, 8rem) 0 var(--ds-space-7); }
+.heading h1 { max-width: 65rem; margin: var(--ds-space-5) 0 var(--ds-space-7); }
+.headingFoot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--ds-space-3); padding-top: var(--ds-space-4); border-top: 1px solid var(--ds-line); color: var(--ds-muted); font-size: var(--ds-text-sm); }
+.layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(16rem, .6fr); gap: clamp(2rem, 6vw, 7rem); }
+.artwork { min-width: 0; }
+.zoomTrigger { position: relative; display: block; width: 100%; padding: 0; border: 0; color: var(--ds-on-media); background: var(--ds-surface); text-align: left; cursor: zoom-in; }
+.zoomTrigger > span { position: absolute; right: 1rem; bottom: 1rem; padding: .65rem .8rem; background: var(--ds-scrim); font-size: var(--ds-text-xs); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.artwork img { width: 100%; height: auto; max-height: 52rem; object-fit: contain; background: var(--ds-surface); }
+.artwork > span { display: block; margin-top: var(--ds-space-3); color: var(--ds-muted); font-size: var(--ds-text-xs); letter-spacing: .12em; }
+.lightbox { width: calc(100vw - 2rem); max-width: 92rem; height: calc(100vh - 2rem); max-height: 60rem; padding: 0; border: 1px solid var(--ds-line); color: var(--ds-fg); background: var(--ds-bg); }
+.lightbox::backdrop { background: var(--ds-scrim); }
+.lightboxBar { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-4); min-height: 4rem; padding: .5rem var(--ds-space-4); border-bottom: 1px solid var(--ds-line); font-size: var(--ds-text-xs); font-weight: 700; letter-spacing: .07em; }
+.lightboxBar > span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.lightboxBar > div { display: flex; align-items: center; gap: var(--ds-space-2); flex: 0 0 auto; }
+.lightboxBar button { min-width: 2.25rem; min-height: 2.25rem; border: 1px solid var(--ds-line); color: var(--ds-fg); background: transparent; font-size: 1.1rem; }
+.lightboxBar button:hover:not(:disabled) { background: var(--ds-surface); }
+.lightboxBar button:disabled { opacity: .4; cursor: default; }
+.lightboxViewport { display: flex; align-items: flex-start; height: calc(100% - 4rem); overflow: auto; }
+.lightboxImage { flex: 0 0 auto; max-width: none; height: auto; max-height: none !important; object-fit: contain; cursor: zoom-in; }
+.aside { align-self: start; padding-top: var(--ds-space-5); border-top: 1px solid var(--ds-fg); }
+.aside h2 { margin: var(--ds-space-7) 0; font-family: var(--ds-font-display); font-size: clamp(2rem, 3vw, 3.5rem); font-weight: 400; letter-spacing: -.04em; }
+.aside dl { margin: 0 0 var(--ds-space-7); }
+.aside dl div { display: grid; grid-template-columns: 5rem 1fr; gap: var(--ds-space-4); padding: var(--ds-space-3) 0; border-bottom: 1px solid var(--ds-line); }
+.aside dt { color: var(--ds-muted); font-size: var(--ds-text-xs); font-weight: 700; letter-spacing: .1em; }
+.aside dd { margin: 0; font-size: var(--ds-text-sm); line-height: 1.5; }
+.notes { display: grid; grid-template-columns: 1fr 1fr; gap: var(--ds-space-8); margin-top: var(--ds-space-8); padding-top: var(--ds-space-6); border-top: 1px solid var(--ds-line); }
+.notes > div > p:last-child { max-width: 40rem; font-family: var(--ds-font-display); font-size: var(--ds-text-lg); line-height: 1.5; }
+.state { min-height: 50vh; padding-top: var(--ds-space-8); font-family: var(--ds-font-display); font-size: var(--ds-text-lg); }
+@media (max-width: 780px) { .layout, .notes { grid-template-columns: 1fr; } .aside { padding-top: var(--ds-space-6); } }

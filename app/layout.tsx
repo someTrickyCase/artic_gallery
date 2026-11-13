@@ -1,15 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-
-const inter = Inter({
-    variable: "--font-inter",
-    subsets: ["latin", "cyrillic"],
-});
+import "@/design-system/global.css";
 
 export const metadata: Metadata = {
     title: "ARTIC Gallery",
-    description: "Chicago Institue of Art API Gallery",
+    description: "A considered way to explore the Art Institute of Chicago collection.",
 };
 
 export default function RootLayout({
@@ -19,7 +13,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en'>
-            <body className={`${inter.variable} antialiased`}>{children}</body>
+            <body>{children}</body>
         </html>
     );
 }

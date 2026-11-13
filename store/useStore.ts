@@ -4,7 +4,6 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 type State = {
     favorites: ArtType[];
-    searchQuery: string;
     preferTheme: ThemeSwitcherType;
     preferLanguage: LanguageSwitcherType;
     selectedArt: ArtType | undefined;
@@ -13,7 +12,6 @@ type State = {
 type Actions = {
     addFavorites: (favoriteToAdd: ArtType) => void;
     removeFromFavorites: (favoriteToRemove: ArtType) => void;
-    setSearchQuery: (query: string) => void;
     setPreferTheme: (preferTheme: ThemeSwitcherType) => void;
     setPreferLanguage: (preferLanguage: LanguageSwitcherType) => void;
     setSelectedArt: (selectedArt: ArtType) => void;
@@ -25,20 +23,15 @@ export const useStore = create<State & Actions>()(
             // FAVORITES
             favorites: [],
             addFavorites: (favoriteArt: ArtType) => {
-                const favorites = [...get().favorites, favoriteArt];
+                const favorites = get().favorites.some((item) => item.id === favoriteArt.id) ? get().favorites : [...get().favorites, favoriteArt];
                 set({ favorites });
             },
             removeFromFavorites: (favoriteToRemove: ArtType) => {
                 const favorites = get().favorites.filter((item) => item.id !== favoriteToRemove.id);
                 set({ favorites });
             },
-            // SEARCH
-            searchQuery: "",
-            setSearchQuery: (searchQuery) => {
-                set({ searchQuery });
-            },
             // LANGUAGE AND COLORTHEME
-            preferTheme: "brigth",
+            preferTheme: "dark",
             preferLanguage: "eng",
             setPreferTheme: (theme) => {
                 set({ preferTheme: theme });
@@ -55,6 +48,11 @@ export const useStore = create<State & Actions>()(
         {
             name: "store",
             storage: createJSONStorage(() => sessionStorage),
+            version: 1,
+            migrate: (persisted) => {
+                const state = persisted as State & Actions;
+                return { ...state, preferTheme: (state.preferTheme as string) === "brigth" ? "light" : state.preferTheme };
+            },
         }
     )
 );

@@ -1,18 +1,3 @@
-export type welcomePhrasesType = {
-    greating: {
-        ru: string;
-        eng: string;
-    };
-    explanation: {
-        ru: string;
-        eng: string;
-    };
-    ctaButtonText: {
-        ru: string;
-        eng: string;
-    };
-};
-
 export type ArtType = {
     id: number;
     image_id: string | null;
@@ -26,10 +11,5 @@ export type ArtType = {
     place_of_origin: string;
 };
 
-export type PreferencesType = {
-    language: LanguageSwitcherType;
-    theme: ThemeSwitcherType;
-};
-
 export type LanguageSwitcherType = "ru" | "eng";
-export type ThemeSwitcherType = "dark" | "brigth";
+export type ThemeSwitcherType = "dark" | "light";
