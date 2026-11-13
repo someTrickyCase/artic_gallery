@@ -1,4 +1,4 @@
-import FavoritesArtsPage from "@/pages/FavoritesArtsPage";
+import FavoritesArtsPage from "@/screens/FavoritesArtsPage";
 
 export default function page() {
     return (

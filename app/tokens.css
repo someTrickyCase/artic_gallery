@@ -1,0 +1,39 @@
+:root {
+    --font-body: var(--font-inter), Arial, sans-serif;
+    --space-1: .25rem;
+    --space-2: .5rem;
+    --space-3: .75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --radius-sm: .125rem;
+    --header-height: 5rem;
+    --content-width: 64rem;
+    --motion-fast: 200ms;
+    --motion-normal: 300ms;
+}
+[data-theme="bright"] {
+    --color-background: #dfdfdf;
+    --color-foreground: #1f1d1c;
+    --color-placeholder: #1f1d1c66;
+    --color-muted: #202020;
+}
+.brigth {
+    --color-background: #dfdfdf;
+    --color-foreground: #1f1d1c;
+    --color-placeholder: #1f1d1c66;
+    --color-muted: #202020;
+}
+[data-theme="dark"] {
+    --color-background: #1a1a1a;
+    --color-foreground: #ececec;
+    --color-placeholder: #ececec66;
+    --color-muted: #d8d8d8;
+}
+.dark {
+    --color-background: #1a1a1a;
+    --color-foreground: #ececec;
+    --color-placeholder: #ececec66;
+    --color-muted: #d8d8d8;
+}

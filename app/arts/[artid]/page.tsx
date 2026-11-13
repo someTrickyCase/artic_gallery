@@ -1,4 +1,4 @@
-import ArtPage from "@/pages/ArtPage";
+import ArtPage from "@/screens/ArtPage";
 
 export default function page() {
     return (

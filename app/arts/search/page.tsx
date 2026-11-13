@@ -1,4 +1,4 @@
-import SearchPage from "@/pages/SearchPage";
+import SearchPage from "@/screens/SearchPage";
 
 export default async function page(prop: { searchParams: Promise<{ query: string }> }) {
     const searchQuery = await prop.searchParams;

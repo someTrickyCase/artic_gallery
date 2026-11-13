@@ -7,13 +7,25 @@ import { LanguageSwitcherType } from "@/types/types";
 
 import Image from "next/image";
 import { DICTIONARY } from "@/settings/dictionary";
+import { useParams } from "next/navigation";
+import useSWR from "swr";
+import { ArtType } from "@/types/types";
 import AddToFavoriteButton from "../shared/AddToFavoriteButton";
 
 const phrases = DICTIONARY.pageDescriptionMessages;
 
 export default function ArtCard({ language }: { language: LanguageSwitcherType }) {
     const { selectedArt } = useStore();
-    if (!selectedArt) return;
+    const params = useParams<{ artid: string }>();
+    const id = Number(params?.artid);
+    const { data: fetchedArt, error } = useSWR<ArtType>(Number.isInteger(id) && id > 0 ? String(id) : null, async (artId: string) => {
+        const response = await fetch(`https://api.artic.edu/api/v1/artworks/${artId}`);
+        if (!response.ok) throw new Error("Failed to load artwork");
+        return (await response.json()).data as ArtType;
+    });
+    const art = selectedArt?.id === id ? selectedArt : fetchedArt;
+    if (error || !Number.isInteger(id) || id <= 0) return <p>Artwork could not be loaded.</p>;
+    if (!art) return <p>Loading artwork…</p>;
 
     const {
         title,
@@ -25,7 +37,7 @@ export default function ArtCard({ language }: { language: LanguageSwitcherType }
         artwork_type_title,
         exhibition_history,
         place_of_origin,
-    } = selectedArt;
+    } = art;
 
     const imageLink = `https://www.artic.edu/iiif/2/${image_id}/full/900,/0/default.jpg`;
 
@@ -39,7 +51,7 @@ export default function ArtCard({ language }: { language: LanguageSwitcherType }
             <div className='one-column !gap-1'>
                 <Image priority src={imageLink} alt={title} width={1600} height={900} />
                 <AddToFavoriteButton
-                    artItem={selectedArt}
+                    artItem={art}
                     language={language}
                     className='self-end my-3'
                 />

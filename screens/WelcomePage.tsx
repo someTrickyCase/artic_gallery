@@ -9,6 +9,7 @@ import { welcomePhrasesType } from "@/types/types";
 import LanguageSwitcher from "@/components/shared/LanguageSwitcher";
 import ThemeSwitcher from "@/components/shared/ThemeSwitcher";
 import LinkButton from "@/components/ui/LinkButton";
+import styles from "@/app/Gallery.module.css";
 
 const phrases: welcomePhrasesType = DICTIONARY["welcomeMessages"];
 
@@ -17,7 +18,7 @@ export default function WelcomePage() {
     const { theme, setTheme } = useTheme();
 
     return (
-        <section className={`fullscreen centered ${theme === "dark" ? "dark" : "brigth"}`}>
+        <section data-theme={theme === "dark" ? "dark" : "bright"} className={`${styles.screen} ${styles.centered} ${theme === "dark" ? "dark" : "brigth"}`}>
             <div className='max-w-[600px] px-5 py-3 one-column !gap-12'>
                 <h1
                     custom-attribute={

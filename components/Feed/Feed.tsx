@@ -40,7 +40,6 @@ export default function Feed({ language }: { language: LanguageSwitcherType }) {
                     language={language}
                     sizeToLoad={size}
                     loader={setSize}
-                    data={data}
                 />
             )}
         </div>

@@ -1,4 +1,4 @@
-import ArtsListPage from "@/pages/ArtsListPage";
+import ArtsListPage from "@/screens/ArtsListPage";
 
 export default function page() {
     return (

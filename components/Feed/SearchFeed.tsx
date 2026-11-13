@@ -46,7 +46,6 @@ export default function Feed({
                     language={language}
                     sizeToLoad={size}
                     loader={setSize}
-                    data={data}
                 />
             )}
         </div>
