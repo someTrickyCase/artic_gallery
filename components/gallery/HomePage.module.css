@@ -1,9 +1,9 @@
 .hero { position: relative; display: flex; align-items: end; min-height: min(800px, 90vh); isolation: isolate; color: var(--ds-on-media); background: var(--ds-media-backdrop); }
-.heroImage { z-index: -2; object-fit: cover; object-position: center 52%; filter: grayscale(1) brightness(.66); }
+.heroImage { z-index: -2; object-fit: cover; object-position: center 52%; filter: brightness(.74); }
 .heroScrim { position: absolute; z-index: -1; inset: 0; background: var(--ds-media-scrim); }
 .heroInner { display: flex; align-items: end; justify-content: space-between; gap: var(--ds-space-6); padding-bottom: clamp(4rem, 8vw, 8rem); }
 .heroCopy { max-width: 43rem; }
-.heroCopy h1 { margin: 2rem 0 2.5rem; font-size: clamp(6rem, 12vw, 13rem); }
+.heroCopy h1 { margin: 2rem 0 2.5rem; font-size: clamp(5rem, 9vw, 9rem); }
 .heroCopy > p:not(:first-child) { max-width: 23rem; }
 .heroLink { display: inline-flex; justify-content: space-between; min-width: 17rem; gap: var(--ds-space-6); margin-top: 3rem; padding-bottom: .7rem; border-bottom: 1px solid currentColor; color: var(--ds-on-media); font-size: var(--ds-text-xs); font-weight: 700; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; }
 .heroNote { font-size: var(--ds-text-xs); font-weight: 700; letter-spacing: .14em; writing-mode: vertical-rl; }
@@ -14,6 +14,6 @@
 .featured { display: grid; grid-template-columns: 1.35fr 1fr; gap: var(--ds-space-5); padding-bottom: var(--ds-space-8); }
 .featuredTop { display: flex; justify-content: space-between; grid-column: 1 / -1; padding-top: var(--ds-space-4); border-top: 1px solid var(--ds-fg); font-size: var(--ds-text-xs); font-weight: 700; letter-spacing: .13em; }
 .featureCard { color: var(--ds-fg); font-size: var(--ds-text-xs); font-weight: 700; letter-spacing: .1em; text-decoration: none; }
-.featureCard img { width: 100%; height: clamp(17rem, 32vw, 30rem); object-fit: cover; filter: grayscale(1); }
+.featureCard img { width: 100%; height: clamp(17rem, 32vw, 30rem); object-fit: cover; }
 .featureCard span { display: block; padding-top: var(--ds-space-3); }
-@media (max-width: 700px) { .hero { min-height: 43rem; } .heroCopy h1 { font-size: clamp(5.5rem, 19vw, 8rem); } .heroNote { display: none; } .next, .featured { grid-template-columns: 1fr; } .nextAside { margin-left: 0; } .featuredTop { grid-column: auto; } }
+@media (max-width: 700px) { .hero { min-height: 43rem; } .heroCopy h1 { font-size: clamp(4rem, 15vw, 7rem); } .heroNote { display: none; } .next, .featured { grid-template-columns: 1fr; } .nextAside { margin-left: 0; } .featuredTop { grid-column: auto; } }

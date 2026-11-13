@@ -1,7 +1,7 @@
 /* Copy this file and primitives.module.css to reuse the visual language. */
 :root {
-  --ds-font-display: Georgia, 'Times New Roman', serif;
-  --ds-font-body: Arial, Helvetica, sans-serif;
+  --ds-font-display: 'Helvetica Neue', Arial, sans-serif;
+  --ds-font-body: 'Helvetica Neue', Arial, sans-serif;
   --ds-text-xs: .7rem;
   --ds-text-sm: .84rem;
   --ds-text-md: 1rem;
